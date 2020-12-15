@@ -7,6 +7,7 @@ import { GlobalEvents, MainStage } from "./Utils/SymbolClasses"
 import { addAutoListener } from "./Utils/Utils"
 import { SceneSwitcher } from "./Scenes/SceneSwitcher"
 import { Renderer, autoDetectRenderer, utils } from "pixi.js"
+import { ResultInfo } from "./Common/ResultInfo"
 
 type Optional<T> = {
     [prop in keyof T]?: T[prop]
@@ -67,7 +68,7 @@ export class Game {
 
         this.events.End.add(remove => {
             if (this._destroyed) return remove()
-            this.destroy()
+            this.destroy(this.events.ResultInfo.Infos);
         })
     }
 
@@ -81,9 +82,9 @@ export class Game {
 
     private _destroyed = false
 
-    ondestroyed?: () => void
+    ondestroyed?: (infos: ResultInfo[]) => void
 
-    destroy() {
+    destroy(infos: ResultInfo[]) {
         if (this._destroyed) return
         this._destroyed = true
         this.ticker.Stop()
@@ -95,7 +96,7 @@ export class Game {
         this.renderer.clear()
         this.renderer.destroy()
         utils.clearTextureCache()
-        if (this.ondestroyed instanceof Function) this.ondestroyed()
+        if (this.ondestroyed instanceof Function) this.ondestroyed(infos);
     }
 
     private resize() {

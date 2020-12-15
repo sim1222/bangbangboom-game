@@ -43,6 +43,17 @@ export class FinishLayer extends FixRatioContainer {
     ) {
         super(LayerWidth, LayerHeight)
 
+        if(!config.autoplay){
+            events.ResultInfo.Infos.push({
+                maxCombo: state.maxCombo,
+                perfect: state.perfect,
+                great: state.great,
+                good: state.good,
+                bad: state.bad,
+                miss: state.miss
+            });
+        }
+
         this.resize(...events.Resize.prevArgs)
         events.Resize.add((remove, w, h) => {
             if (!this.parent) return remove()

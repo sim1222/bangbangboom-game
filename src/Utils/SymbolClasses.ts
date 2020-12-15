@@ -2,9 +2,10 @@ import { GameEvent } from "../Common/GameEvent"
 import { LoaderResource, Container, Sprite } from "pixi.js"
 import { injectable } from "inversify"
 import { GameConfig, staytime } from "../Core/GameConfig"
-import { JudgePoint } from "../Core/GameMap"
+import { fromRawMap, JudgePoint } from "../Core/GameMap"
 import { projection } from "../Core/Projection"
 import { LaneCenterXs } from "../Core/Constants"
+import {ResultInfo, ResultInfoContainer} from "../Common/ResultInfo"
 
 export class MainStage extends Container {}
 
@@ -16,6 +17,8 @@ export class GlobalEvents {
     WindowBlur = new GameEvent<[]>()
     WindowFocus = new GameEvent<[]>()
     End = new GameEvent<[]>()
+    
+    ResultInfo = new ResultInfoContainer()
 }
 
 export class Resources {
