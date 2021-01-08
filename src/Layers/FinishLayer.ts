@@ -9,6 +9,7 @@ import { InfoSprite } from "../Common/InfoObject/InfoSprite"
 import { GameLoadConfig, GameConfig } from "../Core/GameConfig"
 import { InfoNumberSprite } from "../Common/InfoObject/InfoNumberSprite"
 import { AutoPlayLayer } from "./Sublayers/AutoPlayLayer"
+import { ResultInfo } from "../Common/ResultInfo"
 
 type FinishLayerInfo = {
     name?: {
@@ -39,13 +40,15 @@ export class FinishLayer extends FixRatioContainer {
         resources: Resources,
         loadcfg: GameLoadConfig,
         ioc: IOC,
-        config: GameConfig
+        config: GameConfig,
+        resultInfos: ResultInfo
     ) {
         super(LayerWidth, LayerHeight)
 
         if(!config.autoplay){
-            events.ResultInfo.Infos.push({
+            resultInfos.results.push({
                 maxCombo: state.maxCombo,
+                fullCombo: state.maxCombo === state.map.combo,
                 perfect: state.perfect,
                 great: state.great,
                 good: state.good,

@@ -1,5 +1,10 @@
-export type ResultInfo = {
+export class ResultInfo {
+    results: Result[] = [];
+}
+
+export type Result = {
     maxCombo: number,
+    fullCombo: boolean,
 
     perfect: number,
     great: number,
@@ -7,11 +12,3 @@ export type ResultInfo = {
     bad: number,
     miss:number
 };
-
-export class ResultInfoContainer {
-    clear():void {
-
-    }
-
-    Infos: ResultInfo[] = [];
-}

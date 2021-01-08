@@ -7,7 +7,7 @@ import { GlobalEvents, MainStage } from "./Utils/SymbolClasses"
 import { addAutoListener } from "./Utils/Utils"
 import { SceneSwitcher } from "./Scenes/SceneSwitcher"
 import { Renderer, autoDetectRenderer, utils } from "pixi.js"
-import { ResultInfo } from "./Common/ResultInfo"
+import { Result, ResultInfo } from "./Common/ResultInfo"
 
 type Optional<T> = {
     [prop in keyof T]?: T[prop]
@@ -19,6 +19,7 @@ export class Game {
     private readonly ticker = new Ticker()
     private readonly ioc = new Container({ skipBaseClassChecks: true })
     private readonly events = new GlobalEvents()
+    private readonly resultInfos = new ResultInfo();
 
     constructor(canvas: HTMLCanvasElement, config: Optional<GameConfig>, loadConfig: Optional<GameLoadConfig>) {
         if (!GameConfig.validate(config)) {
@@ -38,6 +39,7 @@ export class Game {
         this.ioc.bind(Container).toConstantValue(this.ioc)
         this.ioc.bind(MainStage).toConstantValue(this.stage)
         this.ioc.bind(GlobalEvents).toConstantValue(this.events)
+        this.ioc.bind(ResultInfo).toConstantValue(this.resultInfos)
 
         if (config instanceof GameConfig) this.ioc.bind(GameConfig).toConstantValue(config)
         else this.ioc.bind(GameConfig).toConstantValue(Object.assign(new GameConfig(), config))
@@ -68,7 +70,7 @@ export class Game {
 
         this.events.End.add(remove => {
             if (this._destroyed) return remove()
-            this.destroy(this.events.ResultInfo.Infos);
+            this.destroy(this.resultInfos.results);
         })
     }
 
@@ -82,9 +84,9 @@ export class Game {
 
     private _destroyed = false
 
-    ondestroyed?: (infos: ResultInfo[]) => void
+    ondestroyed?: (infos: Result[]) => void
 
-    destroy(infos: ResultInfo[]) {
+    destroy(infos: Result[]) {
         if (this._destroyed) return
         this._destroyed = true
         this.ticker.Stop()
