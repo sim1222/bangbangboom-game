@@ -75,7 +75,7 @@ export class JudgeManager extends AbsctractJudgeManager {
             if (state.ended) remove()
             if (note.judge && note.judge !== "bad") {
                 if (note.type === "flick" || note.type === "flickend") {
-                    state.on.soundEffect.emit("flick", 0)
+                    if(note.judge !== "miss") state.on.soundEffect.emit("flick", 0);
                 } else {
                     state.on.soundEffect.emit(note.judge, 0)
                 }
