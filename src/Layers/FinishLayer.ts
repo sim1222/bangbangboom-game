@@ -45,7 +45,7 @@ export class FinishLayer extends FixRatioContainer {
     ) {
         super(LayerWidth, LayerHeight)
 
-        if(!config.autoplay){
+        if (!config.autoplay) {
             resultInfos.results.push({
                 maxCombo: state.maxCombo,
                 fullCombo: state.maxCombo === state.map.combo,
@@ -53,8 +53,8 @@ export class FinishLayer extends FixRatioContainer {
                 great: state.great,
                 good: state.good,
                 bad: state.bad,
-                miss: state.miss
-            });
+                miss: state.miss,
+            })
         }
 
         this.resize(...events.Resize.prevArgs)

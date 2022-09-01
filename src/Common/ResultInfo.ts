@@ -1,14 +1,14 @@
 export class ResultInfo {
-    results: Result[] = [];
+    results: Result[] = []
 }
 
 export type Result = {
-    maxCombo: number,
-    fullCombo: boolean,
+    maxCombo: number
+    fullCombo: boolean
 
-    perfect: number,
-    great: number,
-    good: number,
-    bad: number,
-    miss:number
-};
+    perfect: number
+    great: number
+    good: number
+    bad: number
+    miss: number
+}

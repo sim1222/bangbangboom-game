@@ -36,7 +36,7 @@ export class SoundManager {
         state.on.soundEffect.add((remove, type, delay) => {
             if (state.ended) return remove()
 
-            if(type == "miss") return;
+            if (type == "miss") return
             play(type, delay)
         })
 

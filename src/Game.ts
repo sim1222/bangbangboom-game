@@ -19,7 +19,7 @@ export class Game {
     private readonly ticker = new Ticker()
     private readonly ioc = new Container({ skipBaseClassChecks: true })
     private readonly events = new GlobalEvents()
-    private readonly resultInfos = new ResultInfo();
+    private readonly resultInfos = new ResultInfo()
 
     constructor(canvas: HTMLCanvasElement, config: Optional<GameConfig>, loadConfig: Optional<GameLoadConfig>) {
         if (!GameConfig.validate(config)) {
@@ -70,7 +70,7 @@ export class Game {
 
         this.events.End.add(remove => {
             if (this._destroyed) return remove()
-            this.destroy(this.resultInfos.results);
+            this.destroy(this.resultInfos.results)
         })
     }
 
@@ -98,7 +98,7 @@ export class Game {
         this.renderer.clear()
         this.renderer.destroy()
         utils.clearTextureCache()
-        if (this.ondestroyed instanceof Function) this.ondestroyed(infos);
+        if (this.ondestroyed instanceof Function) this.ondestroyed(infos)
     }
 
     private resize() {

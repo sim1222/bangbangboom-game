@@ -1,4 +1,4 @@
-import {Game} from "./Game"
+import { Game } from "./Game"
 
 const div = document.getElementById("app") as HTMLElement
 div.style.position = "fixed"
@@ -14,14 +14,16 @@ div.appendChild(canvas)
 
 // tslint:disable-next-line: no-unused-expression
 // new TestApp(canvas)
-new Game(canvas, {}, {
-    mapContent: {notes: [], slides: []},
-    musicSrc: "./assets/bgm175.mp3",
-    backgroundSrc: "./assets/local/bg.jpg",
-    skin: "./assets/skins",
-    songName: "Ringing Bloom",
-    loadingMessages: ["Message1", "Message2"]
-}).start();
-
-
-(document.getElementById("loader") ?? document.createElement("div")).style.display = "none"
+new Game(
+    canvas,
+    {},
+    {
+        mapContent: { notes: [], slides: [] },
+        musicSrc: "./assets/bgm175.mp3",
+        backgroundSrc: "./assets/local/bg.jpg",
+        skin: "./assets/skins",
+        songName: "Ringing Bloom",
+        loadingMessages: ["Message1", "Message2"],
+    }
+).start()
+;(document.getElementById("loader") ?? document.createElement("div")).style.display = "none"
